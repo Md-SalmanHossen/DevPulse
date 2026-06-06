@@ -28,3 +28,4 @@ export const signupIntoDB=async(payload:IUser)=>{
 
    return result.rows[0];
 }
+
