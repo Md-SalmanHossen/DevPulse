@@ -17,3 +17,14 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
    })
 });
 
+export const login=catchAsync(async(req :Request , res : Response)=>{
+   const result =await authService.loginUser(req.body.email,req.body.password);
+
+   sendResponse(res,{
+      statusCode:StatusCodes.OK,
+      success:true,
+      message:'Login successfully',
+      data:result
+   });
+   
+})
