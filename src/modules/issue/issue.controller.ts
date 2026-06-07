@@ -44,3 +44,38 @@ export const getSingleIssues=catchAsync(async(req:Request,res:Response)=>{
    });
 
 })
+
+export const updateIssue=catchAsync(async(req:Request,res:Response)=>{
+
+   const result = await issuesService.updateIssuesIntoDB(
+      req.params.id as string,
+      req.body,
+      req.user?.id as number,
+      req.user?.role as string,
+   )
+   sendResponse(res,{
+      statusCode:StatusCodes.OK,
+      success:true,
+      message:'Issue update successfully',
+      data:result
+   });
+
+})
+
+export const deleteIssues=catchAsync(async(req:Request,res:Response)=>{
+   const {id}=req.params;
+
+   if(!id){
+      throw new AppError('Invalid or missing ID formate',StatusCodes.BAD_REQUEST)
+   }
+
+   await issuesService.deleteIssueIntoDB(id as string);
+   
+   sendResponse(res,{
+      statusCode:StatusCodes.OK,
+      success:true,
+      message:'Issue deleted successfully',
+      data:null
+   });
+
+})
