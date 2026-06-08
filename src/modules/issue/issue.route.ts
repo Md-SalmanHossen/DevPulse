@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/', auth, issueController.createIssue);
 router.get('/', issueController.getAllIssues);
-router.get('/:id', auth, issueController.getSingleIssues);
+router.get('/:id', issueController.getSingleIssues);
 router.put('/:id', auth, issueController.updateIssue);
 router.delete('/:id', auth, authorize('maintainer'), issueController.deleteIssues);
 
